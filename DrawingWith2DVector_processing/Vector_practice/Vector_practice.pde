@@ -12,6 +12,7 @@ void setup()
 {
   size(640,640,P3D);
   adjust_coordinate_center_direction();
+  dino = new dinosour();
   dino_1 = new dinosour();
   dino_2 = new dinosour();
   dinosours = new dinosour[100];
@@ -19,12 +20,13 @@ void setup()
   {
    dinosours[i] = new dinosour(); 
   }
-  count_peremeter();
-  //cp5 = new ControlP5(this);
-  //cp5.addLabel("Scale Rate : ")
-  //    .setPosition(100,50)
-  //    .setValue(scale);
   
+  //homework
+  //count_peremeter();
+  //print(Vector.cartesian_to_polar_cooridinate(new PVector(-1.34,2.68)));
+  //print(tan(Vector.angleToRadian(22)));
+  //print(Vector.polar_to_cartesian_coordinate(new PVector(1,PI)));
+  //print(Vector.polar_to_cartesian_coordinate(new PVector(8.5,Vector.angleToRadian(125))));
 }
 float angle;
 void draw()
@@ -46,18 +48,8 @@ void draw()
   //draw_homework_2_2_4();
   //draw_100_dinosourd(scale);
   //draw_range_practice();
-}
-void keyPressed()
-{
- if(keyCode == UP)
- {
-   scale += 0.1;
- }
- else if(keyCode==DOWN)
- {
-   scale -= 0.1;
- }
- 
+  //complete_control_dinosour();
+  draw_polar_coordinate();
 }
 
 void count_peremeter()
@@ -96,6 +88,59 @@ void draw_range_practice()
   
   
  }
+}
+void keyPressed()
+{
+ if(key=='A'||key=='a')dino_position.x += -1;
+ else if(key=='W'||key=='w')dino_position.y +=  1;
+ else if(key=='S'||key=='s')dino_position.y += -1;
+ else if(key=='D'||key=='d')dino_position.x +=  1;
+ 
+ if(keyCode == UP){
+   dino_scale += 0.2;
+ }
+ else if(keyCode==DOWN){
+   dino_scale -= 0.2;
+ }
+ 
+ else if(keyCode==RIGHT){
+   dino_angle += Vector.angleToRadian(10);
+ }
+ else if(keyCode==LEFT){
+   dino_angle -= Vector.angleToRadian(10);
+ }
+}
+
+dinosour dino;
+PVector dino_position=new PVector(0,0);
+float dino_angle=0;
+float dino_scale=15;
+
+void draw_polar_coordinate()
+{
+  PVector[] vector_collection = new PVector[1000];
+  for(int i=0; i<vector_collection.length;i++)
+  {
+    vector_collection[i] = new PVector(cos(5*i*PI/500) ,2*PI*i/1000);
+  }
+  beginShape();
+  stroke(255);
+  noFill();
+  for(int i=0; i<vector_collection.length; i++)
+  {
+   PVector cartesian_point = Vector.scale_vector(100,Vector.polar_to_cartesian_coordinate(vector_collection[i]));
+   vertex(cartesian_point.x,cartesian_point.y);
+  }
+  endShape();
+  
+}
+void complete_control_dinosour()
+{
+  //print(dino_position + " " +  dino_angle+ " " + dino_scale);
+  
+  dino.display(dino_position,dino_angle,dino_scale,#FCFF6A);
+  
+  //draw_vector(dino_position);
 }
 float scale = 2;
 void draw_100_dinosourd(float _scale)
@@ -216,6 +261,15 @@ void adjust_coordinate_center_direction()
 void draw_UI()
 {
   //text("Scale : " + scale,155,57);
+  //original point
+  //pushMatrix();
+  //strokeWeight(5);
+  //point(0,0);
+  //textAlign(CENTER, CENTER);
+  //text("dino scale" + dino_scale,100,100);
+  //text("dino angle" + dino_angle,100,120);
+  //text("dino position" + dino_position,100,140);
+  //popMatrix();
   
   //original point
   pushMatrix();

@@ -15,8 +15,10 @@ public class dinosour{
   
   public PVector displacement = new PVector(0,0);
   public color shapeColor;
+  public float strokeWeight=1;
+ 
   
-  public float dinosour_width = 11;
+  public float dinosour_width=11;
   public float dinosour_height = 9;
   dinosour()
   {
@@ -25,19 +27,19 @@ public class dinosour{
   public void display(PVector position,float _angle,float _scale,color _shapeColor)
   {
     pushMatrix();
-    
-    
     PVector[] _dinosour_vec = dinosour_vec.clone();
     scale = _scale;
     angle = _angle;
     displacement = position;
     shapeColor = _shapeColor;
-    
+
     _dinosour_vec = translate_shape(_dinosour_vec,displacement);
-    CreateDinosourShape(_dinosour_vec,shapeColor);
+    _dinosour_vec = Vector.scale_vectors(scale,_dinosour_vec);
+    Vector.rotate_vectors(angle,_dinosour_vec);
     
-    _dinosour.scale(scale);
-    _dinosour.rotate(angle);
+    CreateDinosourShape(_dinosour_vec,shapeColor);
+    //_dinosour.scale(scale);
+    //_dinosour.rotate(angle);
     shape(_dinosour);
     
     popMatrix();
@@ -48,14 +50,12 @@ public class dinosour{
     _dinosour.beginShape();
     _dinosour.noFill();
     _dinosour.stroke(_color);
-    _dinosour.strokeWeight(0.1);
+    _dinosour.strokeWeight(strokeWeight);
     _dinosour.rotate(0);
     
     for(int i=0; i<_dinosour_vec.length; i++)
     {
       _dinosour.vertex(_dinosour_vec[i].x,_dinosour_vec[i].y);
-      //strokeWeight(2);
-      //ellipse(dinosour_vec[i].x,dinosour_vec[i].y,50,50);
     }
     _dinosour.endShape(CLOSE);
   }
