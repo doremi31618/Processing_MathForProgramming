@@ -10,7 +10,7 @@ public static class Vector{
   }
   public static PVector normalize(PVector v1){
     float _length = length(v1);
-    return new PVector(v1.x/_length,v1.y/_length,v1.y/_length);
+    return new PVector(v1.x/_length,v1.y/_length,v1.z/_length);
   }
   
   public static PVector add_all_vector(PVector[] vector_collection)
@@ -95,6 +95,7 @@ public static class Vector{
    {
      v.x *= scale;
      v.y *= scale;
+     v.z *= scale;
    }
    return input;
   }
