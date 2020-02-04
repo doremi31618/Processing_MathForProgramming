@@ -12,6 +12,8 @@ PVector translate_vector ;
 DashedLines dash;
 PeasyCam cam;
 CameraState state;
+Practice m_practice;
+
 void settings(){
   size(640,480,P3D);
 }
@@ -20,6 +22,7 @@ void setup(){
   cam = new PeasyCam(this, 400);
   state = cam.getState();
   dash = new DashedLines(this);
+  m_practice = new Practice();
   translate_vector = new PVector(0,0,0);
 }
 void draw(){
@@ -47,7 +50,7 @@ public void keyPressed(){
  if(key == 'z' ||key =='Z'){
    displacement.z += displacepent_per_unity;
  }else if(key == 'x' ||key =='X'){
-   displacement.y -= displacepent_per_unity;
+   displacement.z -= displacepent_per_unity;
  }
  
  translate_vector = Vector.add(translate_vector,displacement);
@@ -93,27 +96,7 @@ void _3D_Space_simulator(){
   strokeWeight(1);
   stroke(100);
   sphere(50);
-  PVector sum_vector = new PVector(0,0,0);
-  for(int i=0; i<24 ;i++){
-   
-   PVector draw_Vector = 
-     new PVector(
-       sin(PI*i/6) *100,
-       cos(PI*i/6) *100,
-       100.0/3);
-   PVector draw_Next_Vector = 
-     new PVector(
-       sin(PI*i+1/6) *100,
-       cos(PI*i+1/6) *100,
-       1/3);
-   sum_vector = Vector.add(sum_vector,draw_Vector);
-   
-   drawArrow(
-     sum_vector,
-     Vector.add(sum_vector,draw_Next_Vector),
-     #036BFA,
-     0.5);
-  }
+  m_practice.Find_Direction();
   
   
 }
@@ -171,12 +154,12 @@ void drawFloor()
   
   popMatrix();
 }
-void drawVector(PVector v)
+public void drawVector(PVector v)
 {
  drawArrow(new PVector(0,0,0), v,color(255),1);
 }
 
-void drawPointLocater(PVector point,color _origin_to_point_color)
+public void drawPointLocater(PVector point,color _origin_to_point_color)
 {
  pushMatrix();
  stroke(255);
@@ -210,7 +193,7 @@ void drawPointLocater(PVector point,color _origin_to_point_color)
  
 }
 
-void drawArrow(PVector v1, PVector v2,color line_color,float lineWeight)
+public void drawArrow(PVector v1, PVector v2,color line_color,float lineWeight)
 {
   //appearence
   stroke(line_color);
@@ -220,7 +203,7 @@ void drawArrow(PVector v1, PVector v2,color line_color,float lineWeight)
   
 }
 
-void drawDashArrow(PVector v1, PVector v2,color line_color,float lineWeight)
+public void drawDashArrow(PVector v1, PVector v2,color line_color,float lineWeight)
 {
   //appearence
   stroke(line_color);
