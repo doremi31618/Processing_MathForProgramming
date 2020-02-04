@@ -35,8 +35,27 @@ public class Practice{
   original vector to change its length appropriately.
   */
   public void Find_Direction(){
-    PVector normalize_vector = Vector.normalize(new PVector(-1,-1,2));
-    drawVector(normalize_vector);
+    PVector normalize_vector = Vector.scale_vector(100,Vector.normalize(new PVector(-1,-1,2)));
+    drawPointLocater(normalize_vector,color(#8C4BF7));
+  }
+  
+  /*
+  (1,2,-1) ∙ (3, 0, 3) 
+  the product of x coordinates is 3, 
+  the product of y coordinates is 0,  
+  the product of z coordinates is -3.  
+  The sum is 3 + 0 + (-3) = 0
+  
+  these two vectors should be perpendicular.  
+  Drawing them proves this,
+  */
+  public void dot_product_practice(){
+    //drawPointLocater();
+    PVector v1 = new PVector(100,200,-100);
+    PVector v2 = new PVector(300,0,300);
+    println("[practice]dot_product : " + Vector.dot_product(v1,v2));
+    drawPointLocater(v1,#42E2F2);
+    drawPointLocater(v2,#F28942);
   }
   
 }

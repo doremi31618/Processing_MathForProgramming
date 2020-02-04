@@ -96,7 +96,7 @@ void _3D_Space_simulator(){
   strokeWeight(1);
   stroke(100);
   sphere(50);
-  m_practice.Find_Direction();
+  m_practice.dot_product_practice();
   
   
 }
