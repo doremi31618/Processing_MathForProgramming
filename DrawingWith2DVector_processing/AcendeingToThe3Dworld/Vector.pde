@@ -8,9 +8,24 @@ public static class Vector{
   public static PVector add(PVector v1,PVector v2){
     return new PVector(v1.x+v2.x, v1.y+v2.y, v1.z+v2.z); 
   }
+  public static PVector cross_product(PVector v1, PVector v2)
+  {
+   return new PVector
+     (v1.y*v2.z-v2.y*v1.z,
+      v1.z*v2.x-v2.z*v1.x,
+      v1.x*v2.y-v2.x*v1.y);
+           
+  }
   public static float dot_product(PVector v1,PVector v2)
   {
+    //( v1.x*v2.x ) + (v1.y*v2.y) + (v1.z*v2.z)
    return ( v1.x*v2.x ) + (v1.y*v2.y) + (v1.z*v2.z);
+  }
+  
+  //return cos 
+  public static float angle_between_two_vectors(PVector v1, PVector v2)
+  {
+   return acos(dot_product(v1,v2)/(length(v1)*length(v2)));
   }
   public static PVector normalize(PVector v1){
     float _length = length(v1);

@@ -121,5 +121,7 @@ class homework{
     }
     popMatrix();
   }
-  
+  void draw_dot_product(){
+    
+  }
 }

@@ -24,6 +24,11 @@ void setup(){
   dash = new DashedLines(this);
   m_practice = new Practice();
   translate_vector = new PVector(0,0,0);
+  executeOnlyOneTime();
+}
+void executeOnlyOneTime(){
+  //m_practice.calculateAngleBetweenTwoVector();
+  m_practice.test_cross_product();
 }
 void draw(){
   background(50);
@@ -96,8 +101,8 @@ void _3D_Space_simulator(){
   strokeWeight(1);
   stroke(100);
   sphere(50);
-  m_practice.dot_product_practice();
-  
+  //m_practice.dot_product_practice();
+  m_practice.draw_octahedron();
   
 }
 void drawAxis(){

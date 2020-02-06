@@ -3,6 +3,38 @@ public class Practice{
   color green_color = color(0,255,0);
   color blue_color = color(0,0,255);
   PVector translate_vector ;
+  public void draw_octahedron(){
+   pushMatrix();
+   fill(255);
+   beginShape(TRIANGLE);
+   vertex(0,0,100);vertex(0,-100,0);vertex(100,0,0);
+   vertex(0,0,100);vertex(100,0,0);vertex(0,100,0);
+   vertex(0,0,100);vertex(0,100,0);vertex(-100,0,0);
+   vertex(0,0,100);vertex(-100,0,0);vertex(0,-100,0);
+   
+   vertex(0,0,-100);vertex(0,100,0);vertex(100,0,0);
+   vertex(0,0,-100);vertex(-100,0,0);vertex(0,100,0);
+   vertex(0,0,-100);vertex(0,-100,0);vertex(-100,0,0);
+   vertex(0,0,-100);vertex(0,-100,0);vertex(100,0,0);
+   endShape(CLOSE);
+   popMatrix();
+   
+  }
+  public void calculateAngleBetweenTwoVector(){
+    PVector v1 = new PVector(3,4,0);
+    PVector v2 = new PVector(4,3,0);
+    
+    float angle = Vector.angle_between_two_vectors(v1,v2);
+    println("[Practice]AngleBetweenTwoVector : " + angle);
+  }
+  public void test_cross_product(){
+    PVector v1 = new PVector(0,0,3);
+    PVector v2 = new PVector(1,2,0);
+    PVector cross_product = Vector.cross_product(v1,v2);
+    
+    println("[Practice]cross product : "+cross_product);
+    
+  }
   
   public void drawSpirial(){
     PVector sum_vector = new PVector(0,0,0);
