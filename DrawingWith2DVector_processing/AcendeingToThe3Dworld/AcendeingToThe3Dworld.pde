@@ -8,33 +8,40 @@ color green_color = color(0,255,0);
 color blue_color = color(0,0,255);
 
 PVector translate_vector ;
+PShape sphere;
 
 DashedLines dash;
 PeasyCam cam;
 CameraState state;
 Practice m_practice;
+ThreeD_Environment m_environment;
 
 void settings(){
   size(640,480,P3D);
 }
+
 void setup(){
-  
   cam = new PeasyCam(this, 400);
   state = cam.getState();
   dash = new DashedLines(this);
   m_practice = new Practice();
   translate_vector = new PVector(0,0,0);
   executeOnlyOneTime();
+  m_environment = new ThreeD_Environment();
 }
+
 void executeOnlyOneTime(){
   //m_practice.calculateAngleBetweenTwoVector();
   m_practice.test_cross_product();
 }
+
 void draw(){
   background(50);
   OnGUI();
+  //m_environment.display(translate_vector);
   draw_3d_space();
 }
+
 public void keyReleased() {
   if (key == '1') state = cam.getState();
   if (key == '2') cam.setState(state, 1000);
@@ -68,6 +75,12 @@ void OnGUI()
  
 }
 
+public void GenerateSphere(){
+  sphere = createShape();
+  sphere.beginShape();
+  //for(
+  sphere.endShape();
+}
 
 void setting_3d_environment()
 {
@@ -102,10 +115,13 @@ void _3D_Space_simulator(){
   stroke(100);
   sphere(50);
   //m_practice.dot_product_practice();
+  pointLight(51, 102, 126, 200, 200, -200);
   m_practice.draw_octahedron();
   
 }
+
 void drawAxis(){
+  
   //draw positive axis
   drawArrow(new PVector(0,0,0),new PVector(600,0,0),red_color,1);
   drawArrow(new PVector(0,0,0),new PVector(0.1,600,-0.1),green_color,1);
@@ -115,8 +131,6 @@ void drawAxis(){
   drawDashArrow(new PVector(0,0,0),new PVector(0,0,-500),color(50),1);
   //drawDashArrow(new PVector(0,0,0),new PVector(0,-500,0),color(150,150,0));
   //drawDashArrow(new PVector(0,0,0),new PVector(-500,0,0),color(0,150,150));
-  
-  
 }
 void drawFloor()
 {
@@ -136,6 +150,7 @@ void drawFloor()
   vertex(0,0,-500);
   vertex(0,0,0);
   endShape();
+  
   beginShape();
   fill(225);
   vertex(500,500,0);
@@ -146,6 +161,7 @@ void drawFloor()
   
   noFill();
   stroke(150);
+  
   for(int x=0;x<500;x+=50){
     line(x,0,0,x,0,-500);
     line(500,0,-x,0,0,-x);
@@ -204,8 +220,6 @@ public void drawArrow(PVector v1, PVector v2,color line_color,float lineWeight)
   stroke(line_color);
   strokeWeight(lineWeight);
   line(v1.x,v1.y,v1.z,v2.x,v2.y,v2.z);
-  
-  
 }
 
 public void drawDashArrow(PVector v1, PVector v2,color line_color,float lineWeight)
@@ -225,6 +239,4 @@ public void drawDashArrow(PVector v1, PVector v2,color line_color,float lineWeig
      line( _v1.x,_v1.y,_v1.z,_v2.x,_v2.y,_v2.z);
     }
   }
-  
-  
 }
