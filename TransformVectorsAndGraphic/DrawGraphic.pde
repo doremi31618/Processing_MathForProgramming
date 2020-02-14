@@ -1,12 +1,20 @@
 public class DrawGraphic
 {
   //need to be counter clock wise
+  public void draw3DShape(Vector3[] vertices){
+    for(int i=0; i<vertices.length;i+=3){
+      Vector3[] trangle = {vertices[i],vertices[i+1],vertices[i+2]};
+      drawTriangle(trangle);
+    }
+  }
   public void drawTriangle(Vector3[] vertices){
+    if(vertices ==null)return;
+    
     beginShape();
-    vertex(vertices[0].position);
-    vertex(vertices[1].position);
-    vertex(vertices[2].position);
-    endShape();
+    vertex(vertices[0].x,vertices[0].y,vertices[0].z);
+    vertex(vertices[1].x,vertices[1].y,vertices[1].z);
+    vertex(vertices[2].x,vertices[2].y,vertices[2].z);
+    endShape(CLOSE);
   }
   public void drawLine(Vector3 v1, Vector3 v2,color line_color,float lineWeight)
   {
@@ -129,4 +137,44 @@ public class Face{
 public class model{
  public Face[] Faces;
  public Vector3[] vertices;
+ 
+ public model(Vector3[] _vertices)
+ {
+   vertices=_vertices;
+ }
+ 
+ public void scale(float _scale){
+   for(Vector3 v : vertices){
+     v.scale(_scale);
+   }
+ }
+}
+public class GameObject
+{
+  //transform
+  public Vector3 position = new Vector3(0,0,0);
+  public Vector3 rotation = new Vector3(0,0,0);
+  public Vector3 scale = new Vector3(1,1,1);
+  Vector3 _scale = new Vector3(0,0,0);
+  //model
+  public model mesh;
+  Vector3[] _vertices;
+  public GameObject(Vector3[] transform, Vector3[] vertices)
+  {
+    _vertices = vertices;
+    
+    position = transform[0];
+    rotation = transform[1];
+    scale = transform[2];
+    
+    mesh = new model(Arrays.copyOf(vertices, vertices.length));
+  }
+  
+  public void scale(Vector3 _scale){
+    scale.add(_scale);
+    println(scale.x,scale.y,scale.z);
+    for(int i=0; i< mesh.vertices.length; i++){
+      mesh.vertices[i] = Vector3.multiply(_vertices[i],scale);
+    }
+  }
 }
