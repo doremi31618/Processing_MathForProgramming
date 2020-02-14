@@ -5,7 +5,7 @@ import java.util.Arrays;
 PeasyCam cam;
 CameraState state;
 DrawGraphic graphic;
-
+CartesianCoordinateSystem3D coordinateSystem;
 
 GameObject octahedron;
 model octahedron_model;
@@ -22,9 +22,12 @@ Vector3[] octahedron_vertices = {
    new Vector3(0,0,-100),new Vector3(0,-100,0),new Vector3(100,0,0)
 };
 
+
+
 void setup(){
   cam = new PeasyCam(this, 400);
   state = cam.getState();
+  coordinateSystem = new CartesianCoordinateSystem3D();
   graphic = new DrawGraphic();
   
   transform = new Vector3[3];
@@ -33,14 +36,24 @@ void setup(){
   transform[2] = Vector3.unit;
   
   octahedron = new GameObject(transform,octahedron_vertices);
+  octahedron.translate(new Vector3(100,100,-100));
+  octahedron.scale(new Vector3(0.5,0.5,0.5));
+  
 }
 void settings(){
   
   size(640,480,P3D);
 }
 void draw(){
-  background(0);
+  background(50);
+  //pointLight(100,100,100,255,255,255);
+  //octahedron.rotate_All(0.05,0,0.05);
+  coordinateSystem.display();
+  pushMatrix();
+  fill(255);
+  octahedron.rotate_All(0.1,0,0.1);
   graphic.draw3DShape(octahedron.mesh.vertices);
+  popMatrix();
 }
 
 public void keyPressed(){

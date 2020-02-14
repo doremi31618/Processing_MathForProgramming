@@ -159,13 +159,13 @@ public class GameObject
   //model
   public model mesh;
   Vector3[] _vertices;
-  public GameObject(Vector3[] transform, Vector3[] vertices)
+  public GameObject(Vector3[] _transform, Vector3[] vertices)
   {
     _vertices = vertices;
     
-    position = transform[0];
-    rotation = transform[1];
-    scale = transform[2];
+    position = _transform[0];
+    rotation = _transform[1];
+    scale = _transform[2];
     
     mesh = new model(Arrays.copyOf(vertices, vertices.length));
   }
@@ -177,4 +177,32 @@ public class GameObject
       mesh.vertices[i] = Vector3.multiply(_vertices[i],scale);
     }
   }
+  public void translate(Vector3 v1){
+    for(int i=0; i< mesh.vertices.length; i++){
+      mesh.vertices[i].add(v1);
+    }
+  }
+  public void rotate_All(float x_angle,float y_angle,float z_angle){
+    for(int i=0; i< mesh.vertices.length; i++){
+      mesh.vertices[i] = Vector3.rotate_z(z_angle,mesh.vertices[i]);
+      mesh.vertices[i] = Vector3.rotate_x(x_angle,mesh.vertices[i]);
+      mesh.vertices[i] = Vector3.rotate_y(y_angle,mesh.vertices[i]);
+    }
+  }
+  public void cube_strech_z()
+  {
+    for(int i=0; i< mesh.vertices.length; i++){
+      Vector3 cube_strech = mesh.vertices[i];
+      cube_strech.set(cube_strech.x,cube_strech.y,2 * pow(cube_strech.z,3));
+      mesh.vertices[i] = cube_strech;
+    }
+  }
+  public void slant_xz()
+  {
+    for(int i=0; i< mesh.vertices.length; i++){
+      Vector3 slant_v = mesh.vertices[i];
+      slant_v.set(slant_v.x + slant_v.z,slant_v.y,slant_v.z);
+      mesh.vertices[i] = slant_v;
+    }
+   }
 }

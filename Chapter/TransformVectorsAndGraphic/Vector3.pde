@@ -23,6 +23,12 @@ public static class Vector3{
    position[2] = z = _z;
  }
  
+ public void set(float _x, float _y, float _z){
+   x = _x;
+   y = _y;
+   z = _z;
+ }
+ 
  public static Vector3 add(Vector3 v1, Vector3 v2){
    return new Vector3(v1.x+v2.x, v1.y+v2.y, v1.z+v2.z);
  }
@@ -78,6 +84,24 @@ public static class Vector3{
  //return radian of two vector
  public static float angle(Vector3 v1,Vector3 v2){
    return acos(Vector3.dot(v1,v2)/(v1.length() * v2.length()));
+ }
+ 
+ public static Vector3 rotate_z(float angle, Vector3 v1){
+   Vector2 new_X_Y = Vector2.rotate2d(angle,new Vector2(v1.x,v1.y));
+   v1.set(new_X_Y.x,new_X_Y.y,v1.z);
+   return v1;
+ }
+ 
+ public static Vector3 rotate_x(float angle, Vector3 v1){
+   Vector2 new_X_Y = Vector2.rotate2d(angle,new Vector2(v1.y,v1.z));
+   v1.set(v1.x,new_X_Y.x,new_X_Y.y);
+   return v1;
+ }
+ 
+ public static Vector3 rotate_y(float angle, Vector3 v1){
+   Vector2 new_X_Y = Vector2.rotate2d(angle,new Vector2(v1.x,v1.z));
+   v1.set(new_X_Y.x,v1.y,new_X_Y.y);
+   return v1;
  }
  
 }
