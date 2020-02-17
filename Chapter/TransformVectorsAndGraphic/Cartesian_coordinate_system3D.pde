@@ -1,8 +1,9 @@
 public class CartesianCoordinateSystem3D extends GameObject
 {
-  color red_color = color(255,0,0);
-  color green_color = color(0,255,0);
-  color blue_color = color(0,0,255);
+  public color red_color = color(255,0,0);
+  public color green_color = color(0,255,0);
+  public color blue_color = color(0,0,255);
+  
   public CartesianCoordinateSystem3D()
   {
     super(new Vector3[3],new Vector3[0]);

@@ -54,7 +54,7 @@ void draw(){
   fill(255);
   stroke(255);
   strokeWeight(1);
-
+  rotate_x_by_PI_divide_by_2();
   //octahedron.rotate_All(0.1,0,0.1);
   //graphic.draw3DShape(octahedron.mesh.vertices);
   popMatrix();
@@ -80,4 +80,25 @@ public void keyPressed(){
  }
  
  octahedron.scale(displacement);
+}
+
+//For rotate_x_by(pi/2), what are T(e1), T(e2), and T(e3)?
+//e1 = 1,0,0
+//e2 = 0,1,0
+//e3 = 0,0,1
+void rotate_x_by_PI_divide_by_2(){
+  
+  Vector3 e1 = Vector3.rotate_x(PI/2,new Vector3(100,0,0));
+  Vector3 e2 = Vector3.rotate_x(PI/2,new Vector3(0,100,0));
+  Vector3 e3 = Vector3.rotate_x(PI/2,new Vector3(0,0,100));
+  
+  graphic.drawLine(Vector3.zero,e1,coordinateSystem.red_color,3);
+  graphic.drawLine(Vector3.zero,e2,coordinateSystem.green_color,3);
+  graphic.drawLine(Vector3.zero,e3,coordinateSystem.blue_color,3);
+  
+  println("========================");
+  println("e1 : " + e1.x,e1.y,e1.z);
+  println("e2 : " + e2.x,e2.y,e2.z);
+  println("e3 : " + e3.x,e3.y,e3.z);
+  println("========================");
 }
