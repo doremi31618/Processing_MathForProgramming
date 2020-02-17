@@ -43,6 +43,7 @@ void setup(){
 void settings(){
   
   size(640,480,P3D);
+  
 }
 void draw(){
   background(50);
@@ -51,8 +52,11 @@ void draw(){
   coordinateSystem.display();
   pushMatrix();
   fill(255);
-  octahedron.rotate_All(0.1,0,0.1);
-  graphic.draw3DShape(octahedron.mesh.vertices);
+  stroke(255);
+  strokeWeight(1);
+
+  //octahedron.rotate_All(0.1,0,0.1);
+  //graphic.draw3DShape(octahedron.mesh.vertices);
   popMatrix();
 }
 

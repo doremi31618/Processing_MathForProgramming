@@ -172,7 +172,6 @@ public class GameObject
   
   public void scale(Vector3 _scale){
     scale.add(_scale);
-    println(scale.x,scale.y,scale.z);
     for(int i=0; i< mesh.vertices.length; i++){
       mesh.vertices[i] = Vector3.multiply(_vertices[i],scale);
     }

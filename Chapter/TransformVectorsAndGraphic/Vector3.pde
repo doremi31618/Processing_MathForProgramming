@@ -32,6 +32,9 @@ public static class Vector3{
  public static Vector3 add(Vector3 v1, Vector3 v2){
    return new Vector3(v1.x+v2.x, v1.y+v2.y, v1.z+v2.z);
  }
+ public static Vector3 add(Vector3 v1, Vector3 v2, Vector3 v3){
+   return new Vector3(v1.x+v2.x +v3.x, v1.y+v2.y+v3.y, v3.z + v1.z+v2.z);
+ }
  public void add(Vector3 v1){
    x+=v1.x;
    y+=v1.y;
@@ -103,5 +106,28 @@ public static class Vector3{
    v1.set(new_X_Y.x,v1.y,new_X_Y.y);
    return v1;
  }
- 
+ public static Vector3 lerp(Vector3 v1, Vector3 v2, float weight)
+ {
+   weight = constrain(0,1,weight);
+   
+   return Vector3.add(v1.scale(1-weight),v2.scale(weight));
+ }
+ public static Vector3 linear_combination(Vector3 scalers, Vector3 v1, Vector3 v2, Vector3 v3)
+ {
+   
+   Vector3 result = Vector3.add(v1.scale(scalers.x),v2.scale(scalers.y),v3.scale(scalers.z)) ;
+   return result;
+ }
+ public static Vector3 linear_combination(float[] scalers, Vector3[] vector_collection)
+ {
+   Vector3 result = new Vector3(0,0,0);
+   if(scalers.length != vector_collection.length)return result;
+   
+   
+   for(int i=0 ;i<scalers.length; i++){
+     result.add(vector_collection[i].scale((scalers[i])));
+   }
+   print(result.x,result.y,result.z);
+   return result;
+ }
 }
